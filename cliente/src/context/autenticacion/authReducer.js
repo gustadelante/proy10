@@ -25,9 +25,19 @@ export default (state, action) => {
         case OBTENER_USUARIO:
             return {
                 ...state,
+                autenticado: true,
                 usuario: action.payload
             }
-
+        case CERRAR_SESION:
+            localStorage.removeItem('token')
+            //console.log("entra al CERRAR_SESION")
+            return {
+                ...state,
+                token: null,
+                autenticado: null,
+                usuario: null,
+                mensaje: action.payload
+            }
         case SIGNIN_ERROR:
             localStorage.removeItem('token');
             return {

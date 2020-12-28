@@ -80,7 +80,7 @@ const AuthState = (props) => {
 
   }
 
-  //Cuando el usuario hace login
+  //Cuando el usuario hace signin/login
   const iniciarSesion = async datos => {
     try {
       console.log('Entra al iniciarSesion')
@@ -110,15 +110,26 @@ const AuthState = (props) => {
     }
   }
 
+  // Cierra la sesión del usuario
+  const cerrarSesion = () => {
+    //console.log("Pasa por funcion cerrarSEsion");
+    dispatch({
+        type: CERRAR_SESION
+    })
+  }
+
   return (
     <AuthContext.Provider
       value={{
         token: state.token,
         autenticado: state.autenticado,
         username: state.username,
+        usuario: state.usuario,
         mensaje: state.mensaje,
         registrarUsuario,
-        iniciarSesion
+        iniciarSesion,
+        usuarioAutenticado,
+        cerrarSesion
       }}
     >
       {" "}

@@ -8,6 +8,14 @@ import Navbar from "./components/Navbar/Navbar";
 import Barra from "./components/layout/Barra";
 import AlertState from "./context/alerts/alertState";
 import AuthState from './context/autenticacion/authState'
+import tokenAuth from './config/token';
+import RutaPrivada from './components/rutas/RutaPrivada';
+
+// Ver si existe un token
+const token = localStorage.getItem('token');
+if(token) {
+  tokenAuth(token);
+}
 
 function App() {
 
@@ -25,7 +33,7 @@ function App() {
               <Route exact path="/" component={Signin} />
               <Route exact path="/signup" component={Signup} />
               <Route exact path="/products" component={Products} />
-              <Route exact path="/newproduct" component={NewProductForm} />
+              <RutaPrivada exact path="/newproduct" component={NewProductForm} />
             </Switch>
           </div>
         </Router>
