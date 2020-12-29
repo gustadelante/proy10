@@ -25,11 +25,11 @@ function App() {
     <AlertState>
       <AuthState>
         <Router>
-          <Barra />
+          
           <Navbar />
-
+          
           <div className="container p-4">
-            <Switch>
+            <Switch>              
               <Route exact path="/" component={Signin} />
               <Route exact path="/signup" component={Signup} />
               <Route exact path="/products" component={Products} />

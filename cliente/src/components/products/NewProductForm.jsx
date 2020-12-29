@@ -1,4 +1,5 @@
 import React, { Fragment, useState } from "react";
+import Barra from "../layout/Barra";
 
 const NewProduct = () => {
   //State form productos
@@ -33,8 +34,9 @@ const NewProduct = () => {
 
   }
 
-  return (
+  return (    
     <div className="container py-5">
+      <Barra/>      
       <div className="row">
         <div className="col-md-10 mx-auto">
           <form onSubmit={onSubmitProduct}  >
