@@ -1,18 +1,40 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useContext } from "react";
 import Barra from "../layout/Barra";
+import productContext from "../../context/products/productContext";
 
 const NewProduct = () => {
+  // Obtener el state del formulario principal- Esto es para mostrar o no el form de alta
+  // productsContext es un hook
+  const productsContext = useContext(productContext);
+  //const { newForm, insertProduct } = productsContext;
+  const { errorformulario, insertProduct, mostrarError } = productsContext;
+
+  //puedo comparar newForm con un ternario si es true muestro el form sino null
+
   //State form productos
   const [product, saveProduct] = useState({
-    ancho:"",
-    diametro:"",
-    gramaje:"",
-    peso:"",
-    bobinanro: "",
-    of:"",
-    fecha:"",
-    turno:""
+    "ancho": "",
+    "diametro": "",
+    "gramaje": "",
+    "peso": "",
+    "bobinanro": "",
+    "ofnro": "",
+    "fecha": "",
+    "turno": "",
   });
+
+  //Extraer valores ingresados por el usuario
+  const {
+    ancho,
+    diametro,
+    gramaje,
+    peso,
+    bobinanro,
+    ofnro,
+    fecha,
+    turno,
+  } = product; 
+      
 
   //Lee los datos ingresados x el usuario
   const onChangeProduct = (e) => {
@@ -23,23 +45,47 @@ const NewProduct = () => {
   };
 
   //Cuando el usuario presiona imprimir(submit)
-  const onSubmitProduct = e => {
-      e.preventDefault();
+  const onSubmitProduct = (e) => {
+    e.preventDefault();
 
-      //validar product
+    //validar product
+    /* ancho:"",
+    diametro:"",
+    gramaje:"",
+    peso:"",
+    bobinanro: "",
+    of:"",
+    fecha:"",
+    turno:""*/
+    if (ancho === "") {
+      console.log("ancho en blanco", ancho);
+      console.log("errorformulario", errorformulario);
+      mostrarError();
+      return;
+    }
 
-      //agregar al state (persistencia)
+    //agregar al state (persistencia)
+    insertProduct(product);
 
-      //Reinicializar el form
+    //Reinicializar el form
 
-  }
+    saveProduct({
+      "ancho": "",
+      "diametro": "",
+      "gramaje": "",
+      "peso": "",
+      "bobinanro": "",
+      "ofnro": "",
+      "fecha": "",
+      "turno": "",
+    });
+  };
 
-  return (    
+  return (
     <div className="container py-5">
-      <Barra/>      
       <div className="row">
         <div className="col-md-10 mx-auto">
-          <form onSubmit={onSubmitProduct}  >
+          <form onSubmit={onSubmitProduct}>
             <div className="form-group row">
               <div className="col-sm-6">
                 <label for="ancho">Ancho</label>
@@ -47,7 +93,8 @@ const NewProduct = () => {
                   type="number"
                   className="form-control form-control-lg"
                   id="ancho"
-                  placeholder="Ancho"                  
+                  placeholder="Ancho"
+                  value={ancho}
                   onChange={onChangeProduct}
                 />
               </div>
@@ -57,7 +104,8 @@ const NewProduct = () => {
                   type="number"
                   className="form-control form-control-lg"
                   id="diametro"
-                  placeholder="Diametro"                  
+                  placeholder="Diametro"
+                  value={diametro}
                   onChange={onChangeProduct}
                 />
               </div>
@@ -69,7 +117,8 @@ const NewProduct = () => {
                   type="number"
                   className="form-control form-control-lg"
                   id="gramaje"
-                  placeholder="Gramaje"                  
+                  placeholder="Gramaje"
+                  value={gramaje}
                   onChange={onChangeProduct}
                 />
               </div>
@@ -80,6 +129,7 @@ const NewProduct = () => {
                   className="form-control form-control-lg"
                   id="peso"
                   placeholder="Peso"
+                  value={peso}
                   onChange={onChangeProduct}
                 />
               </div>
@@ -92,6 +142,7 @@ const NewProduct = () => {
                   className="form-control form-control-lg"
                   id="bobinanro"
                   placeholder="Número de Bobina"
+                  value={bobinanro}
                   onChange={onChangeProduct}
                 />
               </div>
@@ -100,8 +151,9 @@ const NewProduct = () => {
                 <input
                   type="text"
                   className="form-control form-control-lg"
-                  id="of"
+                  id="ofnro"
                   placeholder="Número de OF"
+                  value={ofnro}
                   onChange={onChangeProduct}
                 />
               </div>
@@ -114,6 +166,7 @@ const NewProduct = () => {
                   className="form-control form-control-lg"
                   id="fecha"
                   placeholder="Fecha"
+                  value={fecha}
                   onChange={onChangeProduct}
                 />
               </div>
@@ -124,14 +177,24 @@ const NewProduct = () => {
                   className="form-control form-control-lg"
                   id="turno"
                   placeholder="Turno"
+                  value={turno}
                   onChange={onChangeProduct}
                 />
               </div>
             </div>
-            <button type="button" className="btn btn-primary px-4 float-right">
+
+            {/* <button type="button" className="btn btn-primary px-4 float-right">
               Imprimir
-            </button>
+            </button> */}
+            <input
+              type="submit"
+              className="btn btn-primary btn-block px-4 float-right"
+              value="Imprimir"
+            />
           </form>
+          {errorformulario ? (
+            <p className="mensaje error">Todos los campos son obligatorios</p>
+          ) : null}
         </div>
       </div>
     </div>
@@ -153,7 +216,6 @@ const NewProduct = () => {
                     autoFocus
                   />
                 </div>
-
                 <div className="form-group">
                   <input
                     type="number"
@@ -174,7 +236,6 @@ const NewProduct = () => {
        <button type="button" className="btn btn-block btn-primario">
         Nuevo Producto
       </button>
-
       <form className="formulario-nuevo-proyecto"></form> }
     </Fragment> }*/
   );

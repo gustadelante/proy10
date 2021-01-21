@@ -1,27 +1,13 @@
-import React, { useContext, useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import AuthContext from "../../context/autenticacion/authContext";
 
 function Navbar() {
-  // Extraer info de autenticacion
-  const authContext = useContext(AuthContext);
-  const { usuario, usuarioAutenticado, cerrarSesion } = authContext;
-
-  useEffect(() => {
-    usuarioAutenticado();
-  }, []);
-
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container">
         <div className="container-fluid">
           <Link className="navbar-brand" to="/">
-            {/* PERSA{" "} */}
-            {usuario ? (
-              <p className="nombre-usuario">
-                Papelera Entre Rios SA - Bienvenido <span>{usuario.username}</span>
-              </p>
-            ) : null}
+            PERSA
           </Link>
           <button
             className="navbar-toggler"
@@ -41,7 +27,7 @@ function Navbar() {
                   Home
                 </Link>
               </li>
-              {/* <li className="nav-item">
+              <li className="nav-item">
                 <Link className="nav-link" to="/">
                   Features
                 </Link>
@@ -50,7 +36,7 @@ function Navbar() {
                 <Link className="nav-link" to="/">
                   Pricing
                 </Link>
-              </li>              
+              </li>
               <li className="nav-item dropdown">
                 <Link
                   className="nav-link dropdown-toggle"
@@ -80,14 +66,9 @@ function Navbar() {
                     <Link className="dropdown-item" to="/">
                       Something else here
                     </Link>
-                  </li>                  
-                </ul>
-              </li> */}
-              <li className="nav-item">
-                    <Link className="nav-link" to="/" onClick={() => cerrarSesion() }>
-                      Cerrar Sesión
-                    </Link>
                   </li>
+                </ul>
+              </li>
             </ul>
           </div>
         </div>

@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import AuthContext from '../../context/autenticacion/authContext';
+import ProductList from '../products/ProductList'
 
 const Products = () => {
 
@@ -19,7 +20,7 @@ const Products = () => {
                 <main>
 
                     <div className="contenedor-products">
-
+                        <ProductList />
                     </div>
                 </main>
 
